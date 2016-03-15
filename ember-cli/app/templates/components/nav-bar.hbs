@@ -1,0 +1,37 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand" href="/#">Timetracker</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <!-- TODO check if we are not making an extra request for user - we should already have him thanks to session services -->
+
+
+                {{#if session.isAuthenticated}}
+                  <li>{{#link-to 'user.index' sessionAccount.account.id}}Profile{{/link-to}}</li>
+                  <li><a {{action 'logout'}} href="#">Logout</a></li>
+                  {{#if sessionAccount.account}}
+                    <p class="navbar-text pull-right">Signed in as {{sessionAccount.account.identification}}</p>
+                  {{/if}}
+                {{else}}
+                    <li>{{#link-to 'register'}}Register{{/link-to}}</li>  <!-- TODO maybe register should be in the login route as a link ? Its a common practice -->
+                    <li>{{#link-to 'login'}}Login{{/link-to}}</li>
+                {{/if}}
+
+
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>

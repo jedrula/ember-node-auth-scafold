@@ -1,0 +1,29 @@
+{
+  "name": "backend-toptal-andrzej-swaton",
+  "version": "1.0.0",
+  "description": "backend for toptal assignment",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "toptal",
+    "express"
+  ],
+  "author": "Andrzej Swaton",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^1.5.1",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.14.2",
+    "express": "^4.13.3",
+    "express-jwt": "^3.3.0",
+    "jsonapify": "^1.6.7",
+    "jsonwebtoken": "^5.5.4",
+    "mongoose": "^4.3.4"
+  },
+  "engines": {
+    "node": "4.2.4"
+  }
+}
