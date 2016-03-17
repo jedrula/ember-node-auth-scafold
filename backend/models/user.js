@@ -7,7 +7,6 @@ var encryption = require('../utils/encryption');
 var schema = mongoose.Schema({
     identification: {type: String, required: true, unique: true},
     password: {type: String, required: true},    //TODO select false wasnt working for me but maybe there is some way?
-    hours: {type: Number, required: true, default: 8},
     //entries: [{ type: mongoose.Schema.ObjectId, ref: 'Entry'}]
 });
 

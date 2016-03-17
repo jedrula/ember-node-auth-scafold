@@ -81,15 +81,13 @@ module.exports = function (app) {
   //TODO manage rights to this resource
   myServerRouter.route('/:id').get([
 
-    //(req,res,next) => {
-    //  console.log(jsonapify.param('id'), jsonapify.param('_id'), 'jsonapify params ');
-    //
-    //  next();
-    //},
+    (req,res,next) => {
+     console.log(jsonapify.param('id'), jsonapify.param('_id'), 'jsonapify params ');
+    
+     next();
+    },
     //debugbody('get id'),
-    jsonapify.read([
-      'User', { _id: jsonapify.param('id') }
-    ]),
+    jsonapify.read(['User', jsonapify.param('id')]),
     logErrors,
     jsonapify.errorHandler()
   ]);

@@ -21,7 +21,6 @@ const userResource = new jsonapify.Resource(User, {
       value: new jsonapify.Property('password'),
       readable: false
     },
-    hours: new jsonapify.Property('hours'),
   },
   //'relationships': {
   //  'entries': new jsonapify.Refs('Entry', 'entries'), //TODO this might be a bug in jsonapify - i think according to jsonapi specs it would make sense if the key was simply 'user' - simillarly to the example from jsonapify README
