@@ -13,6 +13,7 @@ Router.map(function() {
   });
   this.route('register');
   this.route('login');
+  this.route('new');
 });
 
 export default Router;

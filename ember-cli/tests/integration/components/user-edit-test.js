@@ -1,4 +1,4 @@
-import { moduleForComponent, test } from 'ember-qunit';
+  import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('user-edit', 'Integration | Component | user edit', {
@@ -11,14 +11,14 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{user-edit}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.ok(this.$().text().includes('Save'));
 
-  // Template block usage:" + EOL +
+  //No template block usage:" + EOL +
   this.render(hbs`
     {{#user-edit}}
       template block text
     {{/user-edit}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.notOk(this.$().text().includes('template block text'));
 });

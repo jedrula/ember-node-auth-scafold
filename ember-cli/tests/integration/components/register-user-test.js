@@ -11,14 +11,14 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{register-user}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.ok(this.$().text().includes('Signup'));
 
-  // Template block usage:" + EOL +
+  // No template block usage:" + EOL +
   this.render(hbs`
     {{#register-user}}
       template block text
     {{/register-user}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.notOk(this.$().text().includes('template block text'));
 });

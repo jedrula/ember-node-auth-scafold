@@ -11,7 +11,7 @@ export default Ember.Controller.extend({
       userModel.setProperties(properties);  //var userModel
       return userModel.save().then(() => {
         self.transitionToRoute('user.index',userModel);
-      })
+      });
     }
   }
 });

@@ -11,14 +11,16 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{nav-bar}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.ok(this.$().text().includes('Register'));
+
+  assert.ok(this.$().text().includes('Login'));
 
   // Template block usage:" + EOL +
-  this.render(hbs`
-    {{#nav-bar}}
-      template block text
-    {{/nav-bar}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  // this.render(hbs`
+  //   {{#nav-bar}}
+  //     template block text
+  //   {{/nav-bar}}
+  // `);
+  //
+  // assert.equal(this.$().text().trim(), 'template block text');
 });

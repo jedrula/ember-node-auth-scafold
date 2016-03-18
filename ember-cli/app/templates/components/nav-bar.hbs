@@ -19,6 +19,7 @@
 
 
                 {{#if session.isAuthenticated}}
+                  <li>{{#link-to 'new'}}New expense{{/link-to}}</li>
                   <li>{{#link-to 'user.index' sessionAccount.account.id}}Profile{{/link-to}}</li>
                   <li><a {{action 'logout'}} href="#">Logout</a></li>
                   {{#if sessionAccount.account}}

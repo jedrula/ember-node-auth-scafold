@@ -1,5 +1,5 @@
 import Ember from 'ember';
-const { inject: { service } } = Ember;
+//const { inject: { service } } = Ember;
 
 export function canCrud(params/*, hash*/) {
 

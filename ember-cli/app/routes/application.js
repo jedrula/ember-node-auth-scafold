@@ -8,6 +8,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
   sessionAccount: service('session-account'),
 
   beforeModel() {
+    this._super();
     return this._loadCurrentUser();
   },
 
