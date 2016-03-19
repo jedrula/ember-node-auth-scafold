@@ -10,10 +10,12 @@ Router.map(function() {
     path: 'user/:user_id'
   }, function() {
     this.route('edit');
+    this.route('expenses', function() {
+      this.route('new');
+    });
   });
   this.route('register');
   this.route('login');
-  this.route('new');
 });
 
 export default Router;

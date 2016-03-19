@@ -1,0 +1,28 @@
+<form class="form-inline" {{action 'save' on='submit'}}>
+  <!-- <div class="form-group">
+      {{pick-a-date useUTC=true date=(readonly date) on-selected=(action (mut date)) placeholder="Pick a date" options=(readonly extraPickadateOptions)}}
+  </div> -->
+  <div class="form-group">
+      <div class="input-group">
+          <input type="text" class="form-control" id="text" value={{amount}} oninput={{action (mut amount) value="target.value"}}>
+      </div>
+  </div>
+  <div class="form-group">
+      <button type="submit" class="btn btn-primary">Save</button>
+  </div>
+</form>
+{{#if errors}}
+    <div class="alert alert-danger">
+        <p>
+            <strong>Saving entry failed:</strong>
+            {{#each errors as |error|}}
+                {{#if error.message}}
+                    <code>{{error.message}}</code>
+                {{/if}}
+                {{#if error.detail}}
+                    <small>{{error.detail}}</small>
+                {{/if}}
+            {{/each}}
+        </p>
+    </div>
+{{/if}}
