@@ -1,5 +1,6 @@
 <div class="amount">Amount: {{expense.amount}}</div>
 <div class="description"> {{expense.description}} </div>
 <div class="comment"> {{expense.comment}} </div>
+<div class="date"> {{expense.date}} </div>
 {{#link-to "user.expenses.edit" user expense class="btn btn-primary"}}Edit{{/link-to}}
  <button {{action attrs.remove}} type="button" class="btn btn-danger">Remove</button>

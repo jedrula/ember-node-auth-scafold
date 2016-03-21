@@ -1,11 +1,18 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  model(){
+  queryParams: {
+    minDate: {
+      refreshModel: true
+    },
+    maxDate: {
+      refreshModel: true
+    }
+  },
+  model(params){
     const user = this.modelFor('user');
-    const expenses = this.store.query('expense', {
-      user_id: user.id
-    });
+    params.user_id = user.id;
+    const expenses = this.store.query('expense', params);
     return Ember.RSVP.hash({
       user,
       expenses

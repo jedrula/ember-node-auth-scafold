@@ -1,0 +1,33 @@
+<label>From: </label>
+<!-- date=minDate  -->
+{{pick-a-date
+  useUTC=true
+  on-selected=(action (mut minDate))
+  placeholder="From"
+  options=(readonly extraPickadateOptions)
+}}
+
+<label>To: </label>
+<!-- date=minDate  -->
+{{pick-a-date
+  useUTC=true
+  on-selected=(action (mut maxDate))
+  placeholder="To"
+  options=(readonly extraPickadateOptions)
+}}
+
+
+<button {{action 'filter'}}type="submit" class="btn btn-primary">Filter</button>
+<ul class="list-group">
+    {{#each expenses as |expense|}}
+      <li class="list-group-item">
+        {{expense-list-item
+          expense=expense
+          remove=(action attrs.remove expense)
+          user=user
+        }}
+        <!-- edit=(action "edit" user expense) -->
+      </li>
+    {{/each}}
+</ul>
+{{#link-to 'user.expenses.new' user}}Add new expense{{/link-to}}

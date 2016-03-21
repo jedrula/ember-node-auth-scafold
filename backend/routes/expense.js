@@ -24,7 +24,11 @@ module.exports = function (app) {
     jsonapify.enumerate([
       'Expense',
       {
-        user: jsonapify.query('user_id')
+        user: jsonapify.query('user_id'),
+        date: {
+          "$gte": jsonapify.query('minDate'),
+          "$lte": jsonapify.query('maxDate'),
+        }
       }
     ]),
     jsonapify.errorHandler('Expense')
