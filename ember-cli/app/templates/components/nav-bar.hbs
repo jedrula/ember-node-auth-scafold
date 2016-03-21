@@ -19,6 +19,10 @@
 
 
                 {{#if session.isAuthenticated}}
+                  <!-- if is admin TODO -->
+                  <li>{{#link-to 'users'}}Users{{/link-to}}</li>
+                  <!-- end if is admin TODO-->
+                  <li>{{#link-to 'user.expenses' session.data.authenticated.user_id}}Your expenses{{/link-to}}</li>
                   <li>{{#link-to 'user.expenses.new' session.data.authenticated.user_id}}New expense{{/link-to}}</li>
                   <li>{{#link-to 'user.index' session.data.authenticated.user_id}}Profile{{/link-to}}</li>
                   <li><a {{action 'logout'}} href="#">Logout</a></li>

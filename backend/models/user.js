@@ -1,13 +1,13 @@
-var mongoose = require('mongoose');
-var jsonapify = require('jsonapify');   
-var encryption = require('../utils/encryption');
+const mongoose = require('mongoose');
+const jsonapify = require('jsonapify');
+const encryption = require('../utils/encryption');
 
 //var Entry = require('./entry');
 
-var schema = mongoose.Schema({
+const schema = mongoose.Schema({
     identification: {type: String, required: true, unique: true},
     password: {type: String, required: true},    //TODO select false wasnt working for me but maybe there is some way?
-    //entries: [{ type: mongoose.Schema.ObjectId, ref: 'Entry'}]
+    expenses: [{ type: mongoose.Schema.ObjectId, ref: 'Expense'}]
 });
 
 //TODO maybe it would be better if we moved that to middleware to decouple? Although its small enough i think its fine here
@@ -18,7 +18,7 @@ schema.pre('save', function(next, done) {
   // only hash the password if it has been modified (or is new)
   if (!user.isModified('password')) {
     next();
-  } 
+  }
   else{
     encryption.cryptPassword(user.password,(err, hash) => {
       if (err) {
@@ -29,7 +29,7 @@ schema.pre('save', function(next, done) {
         user.password = hash;
         next();
       }
-    }); 
+    });
   }
 });
 

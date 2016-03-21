@@ -1,4 +1,6 @@
-User
-outlet begin
-{{outlet}}
-outlet end
+User {{model.identification}} profile page
+<div>
+  {{#link-to 'user.expenses' model}}
+    view {{model.identification}} expenses
+  {{/link-to}}
+</div>

@@ -19,7 +19,7 @@ var logErrors = logger.logErrors;
 
 
 module.exports = function (app) {
-  myServerRouter.post('/', [
+  myServerRouter.route('/').post([
     debugbody('posting'),
     jsonapify.create('User'),
     function(err, req, res, next) {
@@ -27,54 +27,10 @@ module.exports = function (app) {
                 next(err);
         },
     jsonapify.errorHandler('User')
+  ]).get([
+    jsonapify.enumerate('User'),
+    jsonapify.errorHandler('User')
   ]);
-  /*
-  myServerRouter.post('/', (req, res) => {
-    var newUser = new User();
-    var payload = req.body.user;
-    var identification = payload.identification;
-
-    var password = payload.meta.password;
-    newUser.identification = identification;
-// encryption.cryptPassword(password,(err, hash) => {
-// if(err) {
-//  console.warn('error 401 cryptPassword', err);
-//   res.status(500).send(err.toString())
-// }
-// else {
-
-//newUser.password = hash;
-
-        newUser.save((err, user) => {
-          if(err) {
-            //TODO handle error
-            const DUPLICATION_CODE = 11000; //TODO maybe this should be elsewhere and tested in some way. In a unlikely case of code changes with mongoose/mongo updates this wont work
-            if(err.code === DUPLICATION_CODE) {
-              err = {
-                errors: [{
-                  message: 'you must provide unique identification',
-                  attribute: 'identification'
-                }]
-              }
-            }
-            res.status(400).json(err);
-          }
-          else {
-            //TODO add id
-            res.status(200).json({
-              user: {
-                _id: user._id,
-                identification: user.identification
-              }
-            })
-          }
-        });
-
-
-//}
-// });
-  });
-*/
 
 
 
@@ -83,7 +39,7 @@ module.exports = function (app) {
 
     (req,res,next) => {
      console.log(jsonapify.param('id'), jsonapify.param('_id'), 'jsonapify params ');
-    
+
      next();
     },
     //debugbody('get id'),
@@ -91,35 +47,6 @@ module.exports = function (app) {
     logErrors,
     jsonapify.errorHandler()
   ]);
-
-  //TODO add delete in the same fashion
-  /*
-  myServerRouter.get('/:id', tokenUtils.loggedInRoute(), (req, res) => {
-    console.log('geting a user');
-    User.findById(req.params.id, (err, user) => {
-      var status = 200; //asssume it will be OK
-      var json = {};
-      if(err) {
-        status = 500;
-        json = err;
-      }
-      else {
-        if(user === null) {
-          status = 410;
-        }
-        else{
-          json = {
-            user: {
-              _id: user._id,
-              identification: user.identification
-            }
-          }
-        }
-      }
-      res.status(status).json(json);
-    });
-  });
-*/
 
 
   //TODO allow only for admin and userManager

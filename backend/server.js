@@ -18,10 +18,11 @@ var uristring = isDeployedToProduction ? 'mongodb://admin:toptal@apollo.modulusm
 database.connect(uristring);
 
 var userRoute = require('./routes/user');
+var expenseRoute = require('./routes/expense');
 var tokenAuthRoute = require('./routes/token-auth');
 var tokenRefreshRoute = require('./routes/token-refresh');
 
-var routes = [userRoute, tokenAuthRoute, tokenRefreshRoute];   //TODO iterate through all files in routes automatically and add them to the array
+var routes = [userRoute, expenseRoute, tokenAuthRoute, tokenRefreshRoute];   //TODO iterate through all files in routes automatically and add them to the array
 
 //cors
 app.use(function(req, res, next) {
@@ -51,14 +52,3 @@ var server = app.listen(port,ipaddress,() => {
     });
     console.log('Backend listening at http://%s:%s',host,port);
 });
-
-
-var jsonpatch = require('jsonpatch');
-
-mydoc = {
-  "baz": "qux",
-  "foo": "bar"
-};
-thepatch = [{ "op": "replace", "path": "/baz", "value": "boo" }];
-patcheddoc = jsonpatch.apply_patch(mydoc, thepatch);
-console.log('patcheddoc',patcheddoc);

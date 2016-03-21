@@ -22,9 +22,11 @@ const userResource = new jsonapify.Resource(User, {
       readable: false
     },
   },
-  //'relationships': {
-  //  'entries': new jsonapify.Refs('Entry', 'entries'), //TODO this might be a bug in jsonapify - i think according to jsonapi specs it would make sense if the key was simply 'user' - simillarly to the example from jsonapify README
-  //},
+  // 'relationships': {
+  //  'expenses': {
+  //    data: new jsonapify.Refs('Expense', 'expenses'),
+  //  }
+  // },
   //'relationships': {
   //  'entries': new jsonapify.Property('entries'), //<- this sorts of works - it attaches entities in an array
   //}

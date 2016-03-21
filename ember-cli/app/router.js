@@ -12,10 +12,14 @@ Router.map(function() {
     this.route('edit');
     this.route('expenses', function() {
       this.route('new');
+      this.route('edit', {
+        path: 'edit/:expense_id'
+      });
     });
   });
   this.route('register');
   this.route('login');
+  this.route('users');
 });
 
 export default Router;

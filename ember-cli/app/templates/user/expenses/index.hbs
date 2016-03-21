@@ -1,0 +1,13 @@
+<ul class="list-group">
+    {{#each model.expenses as |expense|}}
+      <li class="list-group-item">
+        {{expense-list-item
+          expense=expense
+          remove=(action "remove" expense)
+          user=model.user
+        }}
+        <!-- edit=(action "edit" user expense) -->
+      </li>
+    {{/each}}
+</ul>
+{{#link-to 'user.expenses.new' model.user}}Add new expense{{/link-to}}
