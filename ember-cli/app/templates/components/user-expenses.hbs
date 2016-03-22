@@ -1,19 +1,19 @@
 <label>From: </label>
-<!-- date=minDate  -->
 {{pick-a-date
   useUTC=true
-  on-selected=(action (mut minDate))
+  on-selected=(action (mut state.minDate))
   placeholder="From"
   options=(readonly extraPickadateOptions)
+  date=state.minDate 
 }}
 
 <label>To: </label>
-<!-- date=minDate  -->
 {{pick-a-date
   useUTC=true
-  on-selected=(action (mut maxDate))
+  on-selected=(action (mut state.maxDate))
   placeholder="To"
   options=(readonly extraPickadateOptions)
+  date=state.maxDate
 }}
 
 

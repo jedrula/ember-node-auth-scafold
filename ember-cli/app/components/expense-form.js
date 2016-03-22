@@ -1,5 +1,6 @@
 import Ember from 'ember';
 
+//TODO maybe we could have a mixin for common code for components like this one or user-expesnes
 export default Ember.Component.extend({
   fields: ['amount','date','description','comment'],
   init(){
