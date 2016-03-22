@@ -11,7 +11,6 @@ export default Ember.Controller.extend({
     },
     filter(filterObj) {
       console.log('controller filter');
-      debugger;
       this.transitionToRoute('user.expenses',this.get('model.user'), { queryParams: filterObj });
     }
   }

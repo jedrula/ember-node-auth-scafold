@@ -6,7 +6,6 @@ export default Ember.Component.extend({
     filter() {
       const minDate = this.get('minDate');
       const maxDate = this.get('maxDate');
-      debugger;
       this.getAttr('filter')({
         minDate,
         maxDate
