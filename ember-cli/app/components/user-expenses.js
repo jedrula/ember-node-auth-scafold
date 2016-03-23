@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  fields: ['minDate','maxDate'],
+  fields: ['minDate','maxDate','description'],
   extraPickadateOptions: {},
 
   init(){
@@ -9,11 +9,12 @@ export default Ember.Component.extend({
     this.state = {
       minDate: undefined,
       maxDate: undefined,
+      description: undefined
     };
   },
 
   _initStateFromAttrs(fields) {
-    return fields.forEach(
+    fields.forEach(
       (element) => {
         let attr = this.getAttr(element);
         if(attr !== undefined) {
@@ -23,7 +24,8 @@ export default Ember.Component.extend({
     );
   },
 
-  didReceiveAttrs() {
+  didReceiveAttrs(obj) {
+    let newAttrs = obj.newAttrs;
     this._super(...arguments);
     this._initStateFromAttrs(this.fields);
     // let amountAttr = this.getAttr('amount');

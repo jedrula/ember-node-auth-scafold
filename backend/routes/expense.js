@@ -10,7 +10,7 @@ var debugbody = logger.debugbody;
 var logErrors = logger.logErrors;
 
 
-
+//
 module.exports = function (app) {
   myServerRouter.route('/').post([
     debugbody('posting'),
@@ -21,16 +21,30 @@ module.exports = function (app) {
         },
     jsonapify.errorHandler('Expense')
   ]).get([
-    jsonapify.enumerate([
-      'Expense',
-      {
-        user: jsonapify.query('user_id'),
-        date: {
-          "$gte": jsonapify.query('minDate'),
-          "$lte": jsonapify.query('maxDate'),
-        }
+    function (req, res, next) {
+      var description = jsonapify.query('description');
+      console.log('description', description);
+      //description = 'FIXME';
+
+      var mongoQuery = {
+          user: jsonapify.query('user_id'),
+          date: {
+            "$gte": jsonapify.query('minDate'),
+            "$lte": jsonapify.query('maxDate'),
+          },
+          
+      };
+
+      if(req.query['description']) {
+        mongoQuery.$text = { $search : description }; //TODO make full text!
       }
-    ]),
+      
+      console.log('the response will be sent by the next function ...');
+      jsonapify.enumerate([
+        'Expense',
+        mongoQuery
+      ])(req,res,next);
+    },
     jsonapify.errorHandler('Expense')
   ]);
 

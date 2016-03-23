@@ -1,23 +1,29 @@
-<label>From: </label>
-{{pick-a-date
-  useUTC=true
-  on-selected=(action (mut state.minDate))
-  placeholder="From"
-  options=(readonly extraPickadateOptions)
-  date=state.minDate 
-}}
+<form role="form" {{action 'filter' on='submit'}}>
+  <label>From: </label>
+  {{pick-a-date
+    useUTC=true
+    on-selected=(action (mut state.minDate))
+    placeholder="From"
+    options=(readonly extraPickadateOptions)
+    date=(readonly state.minDate)
+  }}
 
-<label>To: </label>
-{{pick-a-date
-  useUTC=true
-  on-selected=(action (mut state.maxDate))
-  placeholder="To"
-  options=(readonly extraPickadateOptions)
-  date=state.maxDate
-}}
+  <label>To: </label>
+  {{pick-a-date
+    useUTC=true
+    on-selected=(action (mut state.maxDate))
+    placeholder="To"
+    options=(readonly extraPickadateOptions)
+    date=(readonly state.maxDate)
+  }}
 
+  <div class="form-group">
+    <input type="description" placeholder="description" value={{state.description}} oninput={{action (mut state.description)  value="target.value"}}>
+  </div>
 
-<button {{action 'filter'}}type="submit" class="btn btn-primary">Filter</button>
+  <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+
 <ul class="list-group">
     {{#each expenses as |expense|}}
       <li class="list-group-item">

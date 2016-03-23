@@ -4,7 +4,11 @@ var schema = mongoose.Schema({
   date: {type: Date, required: true},
   //TODO time
   amount: {type: Number, required: true},
-  description: {type: String, required: true},
+  description: {
+  	type: String, 
+  	required: true,
+  	index : "text"
+  },
   comment: {type: String, required: true},
   user: {
     type: mongoose.Schema.ObjectId,

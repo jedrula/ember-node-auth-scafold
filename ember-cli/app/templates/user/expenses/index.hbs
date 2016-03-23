@@ -1,6 +1,9 @@
 {{user-expenses
   expenses=model.expenses
   user=model.user
+  minDate=(stringtodate minDate)
+  maxDate=(stringtodate maxDate)
+  description=description
   remove=(action "remove")
   filter=(action "filter")
 }}

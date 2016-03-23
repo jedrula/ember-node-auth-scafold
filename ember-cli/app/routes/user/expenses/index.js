@@ -7,6 +7,9 @@ export default Ember.Route.extend({
     },
     maxDate: {
       refreshModel: true
+    },
+    description: {
+      refreshModel: true
     }
   },
   model(params){
