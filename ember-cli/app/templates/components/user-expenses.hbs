@@ -17,9 +17,12 @@
     date=(readonly state.maxDate)
   }}
 
-  <div class="form-group">
-    <input type="description" placeholder="description" value={{state.description}} oninput={{action (mut state.description)  value="target.value"}}>
-  </div>
+  <!-- <div class="form-group"> -->
+    <input type="text" placeholder="description" value={{state.description}} oninput={{action (mut state.description)  value="target.value"}}>
+    <input type="number" placeholder="amount" value={{state.amount}} oninput={{action (mut state.amount)  value="target.value"}}>
+  <!-- </div> -->
+
+
 
   <button type="submit" class="btn btn-primary">Filter</button>
 </form>

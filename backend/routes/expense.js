@@ -44,6 +44,14 @@ module.exports = function (app) {
         mongoQuery.date = mongoQuery.date || {};
         mongoQuery.date.$lte = jsonapify.query('maxDate');
       }
+
+      var amount = parseInt(req.query['amount']);
+      if(Number.isFinite(amount)) {
+        mongoQuery.amount = jsonapify.query('amount');
+      }
+      else {
+        console.log('amount is not a number ',[ req.query['amount']])
+      }
       
       console.log('the response will be sent by the next function ...', req.query);
       jsonapify.enumerate([

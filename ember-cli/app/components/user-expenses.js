@@ -1,16 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  fields: ['minDate','maxDate','description'],
+  fields: ['minDate','maxDate','description','amount'],
   extraPickadateOptions: {},
 
   init(){
     this._super(...arguments);
-    this.state = {
-      minDate: undefined,
-      maxDate: undefined,
-      description: undefined
-    };
+    this.state = {};
   },
 
   _initStateFromAttrs(fields) {
@@ -53,6 +49,7 @@ export default Ember.Component.extend({
       //   minDate,
       //   maxDate
       // })
+      debugger;
       this.getAttr('filter')(this.state);
     }
   }

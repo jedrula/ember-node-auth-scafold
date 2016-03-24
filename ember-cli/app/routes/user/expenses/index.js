@@ -10,6 +10,9 @@ export default Ember.Route.extend({
     },
     description: {
       refreshModel: true
+    },
+    amount: {
+      refreshModel: true
     }
   },
   model(params){
