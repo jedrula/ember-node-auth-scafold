@@ -15,6 +15,7 @@ Router.map(function() {
       this.route('edit', {
         path: 'edit/:expense_id'
       });
+      this.route('print');
     });
   });
   this.route('register');

@@ -49,7 +49,6 @@ export default Ember.Component.extend({
       //   minDate,
       //   maxDate
       // })
-      debugger;
       this.getAttr('filter')(this.state);
     }
   }

@@ -40,3 +40,6 @@
     {{/each}}
 </ul>
 {{#link-to 'user.expenses.new' user}}Add new expense{{/link-to}}
+
+<!-- TODO add expenses as second param, add  new route to router -->
+{{#link-to 'user.expenses.print' user (query-params description=description)}}Print{{/link-to}}
