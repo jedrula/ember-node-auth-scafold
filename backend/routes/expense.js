@@ -27,19 +27,25 @@ module.exports = function (app) {
       //description = 'FIXME';
 
       var mongoQuery = {
-          user: jsonapify.query('user_id'),
-          date: {
-            "$gte": jsonapify.query('minDate'),
-            "$lte": jsonapify.query('maxDate'),
-          },
-          
+          user: jsonapify.query('user_id')
       };
 
       if(req.query['description']) {
-        mongoQuery.$text = { $search : description }; //TODO make full text!
+        //mongoQuery.$text = { $search : description }; //this doesnt want to make contains searches
+        mongoQuery.description = { "$regex": description, "$options": "i" }
+      }
+
+      if(req.query['minDate']) {
+        mongoQuery.date = mongoQuery.date || {};
+        mongoQuery.date.$gte = jsonapify.query('minDate');
+      }
+
+      if(req.query['maxDate']) {
+        mongoQuery.date = mongoQuery.date || {};
+        mongoQuery.date.$lte = jsonapify.query('maxDate');
       }
       
-      console.log('the response will be sent by the next function ...');
+      console.log('the response will be sent by the next function ...', req.query);
       jsonapify.enumerate([
         'Expense',
         mongoQuery

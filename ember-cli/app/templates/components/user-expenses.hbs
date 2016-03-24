@@ -2,7 +2,7 @@
   <label>From: </label>
   {{pick-a-date
     useUTC=true
-    on-selected=(action (mut state.minDate))
+    on-selected=(action 'datePicked' 'minDate')
     placeholder="From"
     options=(readonly extraPickadateOptions)
     date=(readonly state.minDate)

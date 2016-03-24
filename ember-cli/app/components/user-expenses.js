@@ -17,9 +17,9 @@ export default Ember.Component.extend({
     fields.forEach(
       (element) => {
         let attr = this.getAttr(element);
-        if(attr !== undefined) {
+        //if(attr !== undefined) {
           this.set(`state.${element}`,attr);
-        }
+        //}
       }
     );
   },
@@ -35,6 +35,17 @@ export default Ember.Component.extend({
   },
 
   actions: {
+    /**
+     * @param  element [minDate or maxDate]
+     */
+    datePicked(element, newDate) {
+      if(newDate) {  //only assign a value if its actually meaningful. 
+        this.set(`state.${element}`, newDate);
+      }
+      else {
+        this.set(`state.${element}`, undefined);  //make sure date is set to undefined when it does not exist. We do not want null. This way it wont get posted in the form submit
+      }
+    },
     filter() {
       // const minDate = this.get('minDate');
       // const maxDate = this.get('maxDate');
