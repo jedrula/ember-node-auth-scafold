@@ -7,7 +7,6 @@ export default Ember.Controller.extend({
     },
     edit() {
       console.log(arguments[0],arguments[1],'TODO edit');
-      debugger;
     },
     filter(filterObj) {
       console.log('controller filter');

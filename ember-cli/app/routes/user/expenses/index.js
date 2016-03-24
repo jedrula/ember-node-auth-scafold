@@ -24,4 +24,9 @@ export default Ember.Route.extend({
   //     expenses
   //   });
   // }
+  setupController(controller, model) {
+    this._super(controller, model);
+    const queryParams = this.paramsFor('user.expenses');
+    controller.setProperties(queryParams);
+  }
 });
