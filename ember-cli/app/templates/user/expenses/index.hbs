@@ -1,10 +1,18 @@
-{{user-expenses
-  expenses=model.expenses
-  user=model.user
+{{user-expenses-filter
   minDate=(stringtodate minDate)
   maxDate=(stringtodate maxDate)
   description=description
   amount=amount
-  remove=(action "remove")
   filter=(action "filter")
 }}
+{{user-expenses
+  expenses=model.expenses
+  user=model.user
+  remove=(action "remove")
+  editable=true
+}}
+
+{{#link-to 'user.expenses.new' model.user}}Add new expense{{/link-to}}
+
+<!-- TODO add expenses as second param, add  new route to router -->
+{{#link-to 'user.expenses.print' model.user (query-params description=description)}}Print{{/link-to}}

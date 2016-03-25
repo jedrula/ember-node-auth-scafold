@@ -1,0 +1,28 @@
+<form role="form" {{action 'filter' on='submit'}}>
+  <label>From: </label>
+  {{pick-a-date
+    useUTC=true
+    on-selected=(action 'datePicked' 'minDate')
+    placeholder="From"
+    options=(readonly extraPickadateOptions)
+    date=(readonly state.minDate)
+  }}
+
+  <label>To: </label>
+  {{pick-a-date
+    useUTC=true
+    on-selected=(action 'datePicked' 'maxDate')
+    placeholder="To"
+    options=(readonly extraPickadateOptions)
+    date=(readonly state.maxDate)
+  }}
+
+  <!-- <div class="form-group"> -->
+    <input type="text" placeholder="description" value={{state.description}} oninput={{action (mut state.description)  value="target.value"}}>
+    <input type="number" placeholder="amount" value={{state.amount}} oninput={{action (mut state.amount)  value="target.value"}}>
+  <!-- </div> -->
+
+
+
+  <button type="submit" class="btn btn-primary">Filter</button>
+</form>
