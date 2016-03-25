@@ -10,6 +10,7 @@ export default Ember.Controller.extend({
     },
     filter(filterObj) {
       console.log('controller filter');
+      //is it the right way to do filtering?
       this.transitionToRoute('user.expenses',this.get('model.user'), { queryParams: filterObj });
     }
   }

@@ -5,11 +5,9 @@ export default Ember.Component.extend({
   fields: ['amount','date','description','comment'],
   init(){
     this._super(...arguments);
+    //set state with only default values
     this.state = {
-      amount: '',
-      date: new Date(),
-      description: '',
-      comment: ''
+      date: new Date()
     };
   },
   _initStateFromAttrs(fields) {
@@ -25,16 +23,9 @@ export default Ember.Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
     this._initStateFromAttrs(this.fields);
-    // let amountAttr = this.getAttr('amount');
-    // if(amountAttr !== undefined) {
-    //   this.set('state.amount',amountAttr);
-    // }
   },
   actions: {
     save() {
-      // this.attrs.persist({
-      //   amount: this.state.amount
-      // });
       this.attrs.persist(this.state);
     }
   }
