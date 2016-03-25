@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   actions: {
     register() {
       const properties = this.getProperties(['identification','password']);
-      this.attrs.onSave(properties).catch((reason) => {
+      this.get('onSave')(properties).catch((reason) => {
       	this.set('errors', reason.errors);
       });
     }

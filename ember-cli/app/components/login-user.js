@@ -6,7 +6,7 @@ export default Ember.Component.extend({
   actions: {
     login() {
       var properties = this.getProperties(['identification','password']);
-      this.attrs.onSave(properties).catch((reason) => {
+      this.get('onSave')(properties).catch((reason) => {
       	this.set('errorMessage', reason.err);
       });
   	}

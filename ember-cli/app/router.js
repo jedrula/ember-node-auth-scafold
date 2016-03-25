@@ -11,16 +11,22 @@ Router.map(function() {
   }, function() {
     this.route('edit');
     this.route('expenses', function() {
+      this.route('print');
+    });
+
+    this.route('expense', function() {
       this.route('new');
+
       this.route('edit', {
         path: 'edit/:expense_id'
       });
-      this.route('print');
     });
   });
   this.route('register');
   this.route('login');
   this.route('users');
+
+  this.route('expense', function() {});
 });
 
 export default Router;

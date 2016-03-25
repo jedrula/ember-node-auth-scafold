@@ -1,18 +1,18 @@
 <form class="form-inline" {{action 'save' on='submit'}}>
 
   <div class="form-group">
-      {{pick-a-date useUTC=true date=(readonly state.date) on-selected=(action (mut date)) placeholder="Pick a date" options=(readonly extraPickadateOptions)}}
+      {{pick-a-date useUTC=true date=(readonly date) on-selected=(action (mut date)) placeholder="Pick a date" options=(readonly extraPickadateOptions)}}
   </div>
 
   <div class="form-group">
     <div class="input-group">
-        <input type="number" class="form-control" id="amount" placeholder='amount' value={{state.amount}} oninput={{action (mut state.amount) value="target.value"}}>
+        <input required=true type="number" class="form-control" id="amount" placeholder='amount' value={{amount}} oninput={{action (mut amount) value="target.value"}}>
     </div>
     <div class="input-group">
-        <input type="text" class="form-control" id="description" placeholder='description' value={{state.description}} oninput={{action (mut state.description) value="target.value"}}>
+        <input required=true type="text" class="form-control" id="description" placeholder='description' value={{description}} oninput={{action (mut description) value="target.value"}}>
     </div>
     <div class="input-group">
-        <input type="text" class="form-control" id="comment" placeholder='comment' value={{state.comment}} oninput={{action (mut state.comment) value="target.value"}}/>
+        <input required=true type="text" class="form-control" id="comment" placeholder='comment' value={{comment}} oninput={{action (mut comment) value="target.value"}}/>
     </div>
   </div>
   <div class="form-group">

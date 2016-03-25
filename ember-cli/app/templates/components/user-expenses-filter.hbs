@@ -5,7 +5,7 @@
     on-selected=(action 'datePicked' 'minDate')
     placeholder="From"
     options=(readonly extraPickadateOptions)
-    date=(readonly state.minDate)
+    date=(readonly minDate)
   }}
 
   <label>To: </label>
@@ -14,12 +14,12 @@
     on-selected=(action 'datePicked' 'maxDate')
     placeholder="To"
     options=(readonly extraPickadateOptions)
-    date=(readonly state.maxDate)
+    date=(readonly maxDate)
   }}
 
   <!-- <div class="form-group"> -->
-    <input type="text" placeholder="description" value={{state.description}} oninput={{action (mut state.description)  value="target.value"}}>
-    <input type="number" placeholder="amount" value={{state.amount}} oninput={{action (mut state.amount)  value="target.value"}}>
+    <input type="text" placeholder="description" value={{description}} oninput={{action (mut description)  value="target.value"}}>
+    <input type="number" placeholder="amount" value={{amount}} oninput={{action (mut amount)  value="target.value"}}>
   <!-- </div> -->
 
 
