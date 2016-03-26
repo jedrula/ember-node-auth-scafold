@@ -1,8 +1,8 @@
 {{user-expenses-filter
-  minDate=(stringtodate minDate)
-  maxDate=(stringtodate maxDate)
-  description=description
-  amount=amount
+  minDate=(stringtodate parentctrl.minDate)
+  maxDate=(stringtodate parentctrl.maxDate)
+  description=(readonly parentctrl.description)
+  amount=(readonly parentctrl.amount)
   filter=(action "filter")
 }}
 {{user-expenses
@@ -15,4 +15,6 @@
 {{#link-to 'user.expense.new' model.user}}Add new expense{{/link-to}}
 
 <!-- TODO add expenses as second param, add  new route to router -->
-{{#link-to 'user.expenses.print' model.user (query-params description=description)}}Print{{/link-to}}
+<!-- (query-params description=description) -->
+
+{{#link-to 'user.expenses.print' model.user}}Print{{/link-to}}

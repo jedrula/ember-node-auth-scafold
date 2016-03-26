@@ -51,8 +51,9 @@ module.exports = function(environment) {
   ENV['ember-simple-auth-token'] = {
     identificationField: 'identification',
     serverTokenEndpoint: ENV.APP.API_SERVER_URL + '/api/token-auth/',
-    timeFactor: 1000
-    //refreshLeeway: 0, TODO add some margin
+    serverTokenRefreshEndpoint: ENV.APP.API_SERVER_URL + '/api/token-refresh/',
+    timeFactor: 1000,
+    refreshLeeway: 2 * 60, //2 minutes before expiration
   }
 
   return ENV;

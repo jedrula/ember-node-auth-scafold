@@ -4,10 +4,7 @@ var API_SECRET = process.env.API_SECRET || 'magic_secret_key';  //TODO add info 
 if(!API_SECRET) {
   console.warn('missing a secret for jwt');
 }
-var expiresIn = 10 * 60;//TODO change to sth more reasonable like: 5 * 60
-
-
-
+var expiresIn = 10 * 60;//10 mintues
 
 module.exports = {
   sign(user) {
@@ -19,8 +16,15 @@ module.exports = {
     });
     return token;
   },
-  getApiSecret() {
-    return API_SECRET
+  verify(token, cb) {
+    jwt.verify(token, API_SECRET,(err, decoded) => {
+      if (err) {
+        cb(err);
+      } else {
+        var token = this.sign(decoded);
+        cb(null,token);
+      }
+    });
   },
   loggedInRoute() {
     return expressJwt({ secret: API_SECRET});
