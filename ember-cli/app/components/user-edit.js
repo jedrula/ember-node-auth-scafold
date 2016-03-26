@@ -3,7 +3,7 @@ const { inject: { service } } = Ember;
 
 export default Ember.Component.extend({
   session: service('session'),
-  sessionAccount: service('session-account'),
+  //sessionAccount: service('session-account'),
   /*
   hours: null,
   didInitAttrs(obj) {

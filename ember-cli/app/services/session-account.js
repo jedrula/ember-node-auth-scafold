@@ -5,21 +5,29 @@ const { inject: { service }, RSVP } = Ember;
 
 export default Ember.Service.extend({
   session: service('session'),
-  store: service(),
+  token: Ember.computed('session.data.authenticated', function() {
+    let encoded = this.get('session.data.authenticated.token');
+    if(encoded) {
+      const token =  this.getTokenData(encoded);
+      return token;
+    }
+  }),
 
-  loadCurrentUser() {
-    return new RSVP.Promise((resolve, reject) => {
-      const id = this.get('session.data.authenticated.user_id');
-      if (!Ember.isEmpty(id)) {
+  //TODO this is copypasta from jwt from ember-simple-auth, could probably import it somehow
+  /**
+    Returns the decoded token with accessible returned values.
 
-        return this.get('store').find('user', id).then((account) => {
-          this.set('account', account);
-          resolve();
-        }, reject);
-      } else {
-        console.log('is empty id');
-        resolve();
-      }
-    });
+    @method getTokenData
+    @return {object} An object with properties for the session.
+  */
+  getTokenData(token) {
+
+    const tokenData = atob(token.split('.')[1]);
+
+    try {
+      return JSON.parse(tokenData);
+    } catch (e) {
+      return tokenData;
+    }
   }
 });

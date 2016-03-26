@@ -45,8 +45,7 @@ module.exports = function (app) {
         //TODO send roles like admin or userAdmin
         var token = tokenUtils.sign(user);
         var json = {
-          token: token,
-          user_id: user._id
+          token: token
         };
         console.log('sending json back', json);
         res.status(200).json(json);

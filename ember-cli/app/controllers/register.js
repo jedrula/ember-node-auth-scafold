@@ -18,8 +18,7 @@ export default Ember.Controller.extend({
       return user.save().then(function() {
         this.get('session').authenticate('authenticator:jwt', {
           password: password,
-          identification: identification,
-          hours: data.hours
+          identification: identification
         }).then(() => {
           Ember.run(() => {
             self.transitionToRoute('user.index',user);

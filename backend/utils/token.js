@@ -4,12 +4,14 @@ var API_SECRET = process.env.API_SECRET || 'magic_secret_key';  //TODO add info 
 if(!API_SECRET) {
   console.warn('missing a secret for jwt');
 }
+
 var expiresIn = 10 * 60;//10 mintues
 
 module.exports = {
   sign(user) {
     var token = jwt.sign({
       identification: user.identification,
+      id: user._id,
       scopes: user.scopes
     }, API_SECRET, {
       expiresIn: expiresIn
