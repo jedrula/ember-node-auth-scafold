@@ -1,8 +1,8 @@
 {{user-expenses-print
   expenses=model.expenses
   user=model.user
-  minDate=(stringtodate minDate)
-  maxDate=(stringtodate maxDate)
-  description=description
-  amount=amount
+  minDate=(stringtodate parentctrl.minDate)
+  maxDate=(stringtodate parentctrl.maxDate)
+  description=parentctrl.description
+  amount=parentctrl.amount
 }}

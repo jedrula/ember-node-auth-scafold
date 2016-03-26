@@ -1,6 +1,30 @@
-readonly filters
-{{user-expenses
-  expenses=expenses
-  user=user
-}}
-sum of expenses {{totalSpent}} and avg per day {{avgSpent}}
+
+
+<label>From:</label> {{#if spanFrom}} {{moment-format spanFrom 'MM.DD.YYYY'}} {{else}} not specified {{/if}}
+
+
+<label>To: </label> {{moment-format spanTo 'MM.DD.YYYY'}}
+{{#if description}}
+<label> Decripttion: </label> {{description}}
+{{/if}}
+{{#if amount}}
+<label> Amount: </label> {{amount}}
+{{/if}}
+
+
+{{#if expenses}}
+  {{user-expenses
+    expenses=expenses
+    user=user
+  }}
+  <div>
+    sum of expenses {{totalSpent}}
+  </div>
+  <div>
+    Avg expense per day: {{avgSpent}}
+  </div>
+{{else}}
+  <div>
+    no expenses
+  </div>
+{{/if}}

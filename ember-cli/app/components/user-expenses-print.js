@@ -6,9 +6,29 @@ export default Ember.Component.extend({
     let ret =  this.get('expenses').reduce((previousValue, item) => previousValue + item.get('amount'),0);
     return ret;
   }),
-  avgSpent: Ember.computed('totalSpent', function() {
+
+  getDates() {
+    return this.get('expenses').map((e) => e.get('date'));
+  },
+
+  spanFrom: Ember.computed('minDate','expenses', function() {
     const minDate = this.get('minDate');
-    const maxDate = this.get('maxDate') || new Date();
+    if(minDate) {
+      return minDate;
+    }
+    else if (this.get('expenses.length')){
+      const min =  Math.min(...this.getDates());
+      return new Date(min);
+    }
+  }),
+
+  spanTo: Ember.computed('maxDate','expenses', function() {
+    return this.get('maxDate') || new Date();
+  }),
+
+  avgSpent: Ember.computed('totalSpent','spanFrom','spanTo', function() {
+    const minDate = this.get('spanFrom');
+    const maxDate = this.get('spanTo');
     if(minDate) {
       const start = moment(minDate);
       const end = moment(maxDate);
@@ -16,6 +36,5 @@ export default Ember.Component.extend({
       const days = Math.ceil(duration.asDays());
       return this.get('totalSpent') / days;
     }
-
   })
 });
