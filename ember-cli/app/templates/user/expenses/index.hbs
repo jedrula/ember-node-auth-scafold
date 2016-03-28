@@ -1,3 +1,4 @@
+
 {{user-expenses-filter
   minDate=(stringtodate parentctrl.minDate)
   maxDate=(stringtodate parentctrl.maxDate)
@@ -11,10 +12,8 @@
   remove=(action "remove")
   editable=true
 }}
-
-{{#link-to 'user.expense.new' model.user}}Add new expense{{/link-to}}
-
-<!-- TODO add expenses as second param, add  new route to router -->
-<!-- (query-params description=description) -->
+{{#if (can "crud expense" ownerid=model.user.id)}}
+  {{#link-to 'user.expense.new' model.user}}Add new expense{{/link-to}}
+{{/if}}
 
 {{#link-to 'user.expenses.print' model.user}}Print{{/link-to}}
