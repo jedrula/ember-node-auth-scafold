@@ -9,14 +9,10 @@ const userResource = new jsonapify.Resource(User, {
     value: new jsonapify.Property('_id'),
     writable: false,
   },
-  //links: {
-  //    self: {
-  //        value: new jsonapify.Template('/users/${FirstName}'),
-  //        writable: false,
-  //    },
-  //},
   attributes: {
     identification: new jsonapify.Property('identification'),
+    admin: new jsonapify.Property('admin'),
+    usermanager: new jsonapify.Property('usermanager'),
     password: {
       value: new jsonapify.Property('password'),
       readable: false

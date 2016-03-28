@@ -14,10 +14,6 @@ var logErrors = logger.logErrors;
 
 
 //TODO make sure that this uses SSL
-
-
-
-
 module.exports = function (app) {
   myServerRouter.route('/').post([
     debugbody('posting'),
@@ -36,10 +32,8 @@ module.exports = function (app) {
 
   //TODO manage rights to this resource
   myServerRouter.route('/:id').get([
-
     (req,res,next) => {
      console.log(jsonapify.param('id'), jsonapify.param('_id'), 'jsonapify params ');
-
      next();
     },
     //debugbody('get id'),
@@ -50,23 +44,10 @@ module.exports = function (app) {
 
 
   //TODO allow only for admin and userManager
-  myServerRouter.route('/:id').delete(tokenUtils.loggedInRoute(), (req, res) => {
-    console.log('deleting a user');
-    User.findByIdAndRemove(req.params.id, (err, data) => {
-      var status = 200; //asssume it will be OK
-      var json = {};
-      if(err) {
-        status = 500;
-        json = err;
-      }
-      else {
-        if(data === null) {
-          status = 410;
-        }
-      }
-      res.status(status).json(json);
-    });
-  }).patch([
+  myServerRouter.route('/:id').delete([
+    jsonapify.remove(['User',jsonapify.param('id')]),
+    jsonapify.errorHandler()
+  ]).patch([
     (req,res) => {
       var attributes = {};
       var id = req.params.id;

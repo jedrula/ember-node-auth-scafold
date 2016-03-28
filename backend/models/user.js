@@ -6,6 +6,8 @@ const encryption = require('../utils/encryption');
 
 const schema = mongoose.Schema({
     identification: {type: String, required: true, unique: true},
+    admin: {type: Boolean, default: false},
+    usermanager: {type: Boolean, default: false},
     password: {type: String, required: true},    //TODO select false wasnt working for me but maybe there is some way?
     expenses: [{ type: mongoose.Schema.ObjectId, ref: 'Expense'}]
 });

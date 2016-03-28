@@ -5,25 +5,26 @@ if(!API_SECRET) {
   console.warn('missing a secret for jwt');
 }
 
-var expiresIn = 10 * 60;//10 mintues
+var expiresIn = 120;//10 * 60;//10 mintues
 
 module.exports = {
-  sign(user) {
-    var token = jwt.sign({
-      identification: user.identification,
-      id: user._id,
-      scopes: user.scopes
-    }, API_SECRET, {
+  sign(obj) {
+    var token = jwt.sign(
+    obj,
+    API_SECRET, {
       expiresIn: expiresIn
     });
     return token;
   },
   verify(token, cb) {
+    console.log('verify token', token);
+    var self = this;  //TODO cleanup this, self , etc
     jwt.verify(token, API_SECRET,(err, decoded) => {
       if (err) {
         cb(err);
       } else {
-        var token = this.sign(decoded);
+        console.log('signing new decoded token', decoded);
+        var token = self.sign(decoded);
         cb(null,token);
       }
     });

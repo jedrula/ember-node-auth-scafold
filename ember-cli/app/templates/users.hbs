@@ -1,3 +1,9 @@
+<ul class="list-group">
 {{#each model as |user|}}
-  {{user-list-item identification=user.identification user_id=user.id}}
+  <li class="list-group-item">
+    {{#link-to 'user.index' user}}
+      {{user.identification}}
+    {{/link-to}}
+  </li>
 {{/each}}
+</ul>

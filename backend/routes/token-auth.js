@@ -1,3 +1,4 @@
+"use strict";
 var express = require('express');
 var myServerRouter = express.Router();
 var User = require('../models/user');
@@ -43,7 +44,32 @@ module.exports = function (app) {
       }
       else {
         //TODO send roles like admin or userAdmin
-        var token = tokenUtils.sign(user);
+        let id = user._id;
+        let crudExpensesOwnedBy = user._id;
+        let crudUsers = user._id;
+        if(user.admin) {
+          crudExpensesOwnedBy = "*";
+          crudUsers = "*";
+        }
+        if(user.usermanager) {
+          crudUsers = "*";
+        }
+
+
+        let obj = {
+          id,
+          identification: user.identification,
+          admin: user.admin,
+          usermanager: user.usermanager,
+          scopes: {
+            crud: {
+              expense: crudExpensesOwnedBy,
+              user: crudUsers
+            }
+          }
+
+        };
+        var token = tokenUtils.sign(obj);
         var json = {
           token: token
         };

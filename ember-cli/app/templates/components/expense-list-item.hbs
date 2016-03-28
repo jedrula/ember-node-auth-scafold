@@ -3,6 +3,8 @@
 <div class="comment"> {{expense.comment}} </div>
 <div class="date"> {{expense.date}} </div>
 {{#if editable}}
-  {{#link-to "user.expense.edit" user expense class="btn btn-primary"}}Edit{{/link-to}}
-   <button {{action attrs.remove}} type="button" class="btn btn-danger">Remove</button>
+  {{#if (can "crud expense" ownerid=user.id)}}
+    {{#link-to "user.expense.edit" user expense class="btn btn-primary"}}Edit{{/link-to}}
+    <button {{action attrs.remove}} type="button" class="btn btn-danger">Remove</button>
+   {{/if}}
  {{/if}}

@@ -9,14 +9,12 @@ Router.map(function() {
   this.route('user', {
     path: 'user/:user_id'
   }, function() {
-    this.route('edit');
     this.route('expenses', function() {
       this.route('print');
     });
 
     this.route('expense', function() {
       this.route('new');
-
       this.route('edit', {
         path: 'edit/:expense_id'
       });

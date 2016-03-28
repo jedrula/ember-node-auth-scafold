@@ -16,15 +16,15 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 {{#if sessionAccount.session.isAuthenticated}}
-                  <!-- if is admin TODO -->
+                  {{#if (can "crud user" id="*")}}
                   <li>{{#link-to 'users'}}Users{{/link-to}}</li>
-                  <!-- end if is admin TODO-->
+                  {{/if}}
                   <li>{{#link-to 'user.expenses' sessionAccount.token.id}}Your expenses{{/link-to}}</li>
                   <li>{{#link-to 'user.expense.new' sessionAccount.token.id}}New expense{{/link-to}}</li>
                   <li>{{#link-to 'user.index' sessionAccount.token.id}}Profile{{/link-to}}</li>
                   <li><a {{action 'logout'}} href="#">Logout</a></li>
-                  {{#if sessionAccount.account}}
-                    <p class="navbar-text pull-right">Signed in as {{sessionAccount.account.identification}}</p>
+                  {{#if sessionAccount.token.identification}}
+                    <p class="navbar-text pull-right">Signed in as {{sessionAccount.token.identification}}</p>
                   {{/if}}
                 {{else}}
                     <li>{{#link-to 'register'}}Register{{/link-to}}</li>  <!-- TODO maybe register should be in the login route as a link ? Its a common practice -->
