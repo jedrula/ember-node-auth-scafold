@@ -1,10 +1,12 @@
 <form role="form" {{action 'filter' on='submit'}}>
+
+{{debugger}}
   <label>From: </label>
   {{pick-a-date
     useUTC=true
     on-selected=(action 'minDatePicked')
     placeholder="From"
-    options=(readonly extraPickadateOptions)
+    options=(readonly extraPickadateOptionsFrom)
     date=(readonly minDate)
   }}
 
@@ -13,7 +15,7 @@
     useUTC=true
     on-selected=(action 'maxDatePicked')
     placeholder="To"
-    options=(readonly extraPickadateOptions)
+    options=(readonly extraPickadateOptionsTo)
     date=(readonly maxDate)
   }}
 

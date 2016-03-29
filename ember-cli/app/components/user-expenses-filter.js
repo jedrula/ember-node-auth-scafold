@@ -1,7 +1,30 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  extraPickadateOptions: {},
+  // extraPickadateOptionsFrom: Ember.computed('maxDate', function() {
+  //   debugger;
+  //   return {
+  //     max: this.get('maxDate')
+  //   };
+  // }),
+
+  // extraPickadateOptionsTo: Ember.computed('minDate', function() {
+  //   return {
+  //     min: this.get('minDate')
+  //   };
+  // }),
+
+  didReceiveAttrs() {
+    this._super(...arguments);
+
+    this.set('extraPickadateOptionsFrom', {
+        max: this.get('maxDate')
+    });
+
+    this.set('extraPickadateOptionsTo', {
+        min: this.get('minDate')
+    });
+  },
 
   actions: {
     minDatePicked(newDate) {
