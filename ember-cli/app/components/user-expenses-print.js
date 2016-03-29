@@ -12,18 +12,11 @@ export default Ember.Component.extend({
   },
 
   spanFrom: Ember.computed('minDate','expenses', function() {
-    const minDate = this.get('minDate');
-    if(minDate) {
-      return minDate;
-    }
-    else if (this.get('expenses.length')){
-      const min =  Math.min(...this.getDates());
-      return new Date(min);
-    }
+    return this.get('minDate') || Math.min(...this.getDates(),new Date());
   }),
 
   spanTo: Ember.computed('maxDate','expenses', function() {
-    return this.get('maxDate') || new Date();
+    return this.get('maxDate') || Math.max(...this.getDates(),new Date());
   }),
 
   avgSpent: Ember.computed('totalSpent','spanFrom','spanTo', function() {
