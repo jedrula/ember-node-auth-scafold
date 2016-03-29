@@ -1,5 +1,5 @@
 <ul class="list-group">
-    {{#each expenses as |expense|}}
+    {{#each sortedExpenses as |expense|}}
       <li class="list-group-item">
         {{expense-list-item
           expense=expense
@@ -7,7 +7,6 @@
           user=user
           editable=editable
         }}
-        <!-- edit=(action "edit" user expense) -->
       </li>
     {{/each}}
 </ul>

@@ -1,9 +1,9 @@
 
 
-<label>From:</label> {{#if spanFrom}} {{moment-format spanFrom 'MM.DD.YYYY'}} {{else}} not specified {{/if}}
+<label>From:</label> {{#if spanFrom}} {{moment-format spanFrom 'DD MMMM, YYYY'}} {{else}} not specified {{/if}}
 
 
-<label>To: </label> {{moment-format spanTo 'MM.DD.YYYY'}}
+<label>To: </label> {{moment-format spanTo 'DD MMMM, YYYY'}}
 {{#if description}}
 <label> Decripttion: </label> {{description}}
 {{/if}}
