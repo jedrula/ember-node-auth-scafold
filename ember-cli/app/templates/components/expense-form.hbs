@@ -6,7 +6,7 @@
 
   <div class="form-group">
     <div class="input-group">
-        <input required=true type="number" class="form-control" id="amount" placeholder='amount' value={{amount}} oninput={{action (mut amount) value="target.value"}}>
+        <input required=true min=0 type="number" class="form-control" id="amount" placeholder='amount' value={{amount}} oninput={{action (mut amount) value="target.value"}}>
     </div>
     <div class="input-group">
         <input required=true type="text" class="form-control" id="description" placeholder='description' value={{description}} oninput={{action (mut description) value="target.value"}}>
