@@ -1,29 +1,29 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  // extraPickadateOptionsFrom: Ember.computed('maxDate', function() {
-  //   debugger;
-  //   return {
-  //     max: this.get('maxDate')
-  //   };
-  // }),
+  extraPickadateOptionsFrom: Ember.computed('maxDate', function() {
+    
+    return {
+      max: this.get('maxDate')
+    };
+  }),
 
-  // extraPickadateOptionsTo: Ember.computed('minDate', function() {
-  //   return {
-  //     min: this.get('minDate')
-  //   };
-  // }),
+  extraPickadateOptionsTo: Ember.computed('minDate', function() {
+    return {
+      min: this.get('minDate')
+    };
+  }),
 
   didReceiveAttrs() {
     this._super(...arguments);
 
-    this.set('extraPickadateOptionsFrom', {
-        max: this.get('maxDate')
-    });
+    // this.set('extraPickadateOptionsFrom', {
+    //     max: this.get('maxDate')
+    // });
 
-    this.set('extraPickadateOptionsTo', {
-        min: this.get('minDate')
-    });
+    // this.set('extraPickadateOptionsTo', {
+    //     min: this.get('minDate')
+    // });
   },
 
   actions: {
@@ -33,7 +33,7 @@ export default Ember.Component.extend({
         this.set('minDate', newDate);
       }
       else {
-        this.set(element, undefined);  //make sure date is set to undefined when it does not exist. We do not want null. This way it wont get posted in the form submit
+        this.set('minDate', undefined);  //make sure date is set to undefined when it does not exist. We do not want null. This way it wont get posted in the form submit
       }
     },
     maxDatePicked(newDate) {
@@ -42,7 +42,7 @@ export default Ember.Component.extend({
         this.set('maxDate', newDate);
       }
       else {
-        this.set(element, undefined);  //make sure date is set to undefined when it does not exist. We do not want null. This way it wont get posted in the form submit
+        this.set('maxDate', undefined);  //make sure date is set to undefined when it does not exist. We do not want null. This way it wont get posted in the form submit
       }
     },
     filter() {
