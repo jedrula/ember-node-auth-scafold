@@ -18,6 +18,7 @@
                 {{#if sessionAccount.session.isAuthenticated}}
                   {{#if (can "crud user" id="*")}}
                   <li>{{#link-to 'users'}}Users{{/link-to}}</li>
+                  <li>{{#link-to 'createuser'}}Create new user{{/link-to}}</li>
                   {{/if}}
                   <li>{{#link-to 'user.expenses' sessionAccount.token.id}}Your expenses{{/link-to}}</li>
                   <li>{{#link-to 'user.expense.new' sessionAccount.token.id}}New expense{{/link-to}}</li>

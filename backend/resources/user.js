@@ -1,8 +1,6 @@
 var jsonapify = require('jsonapify');
 var User = require('../models/user');
 
-
-
 const userResource = new jsonapify.Resource(User, {
   type: 'users',
   id: {
@@ -11,21 +9,20 @@ const userResource = new jsonapify.Resource(User, {
   },
   attributes: {
     identification: new jsonapify.Property('identification'),
-    admin: new jsonapify.Property('admin'),
-    usermanager: new jsonapify.Property('usermanager'),
+    admin: {
+      value: new jsonapify.Property('admin'),
+      nullable: true
+    },
+    usermanager: {
+      value: new jsonapify.Property('usermanager'),
+      nullable: true
+    },
     password: {
       value: new jsonapify.Property('password'),
-      readable: false
+      readable: false,
+      nullable: true
     },
-  },
-  // 'relationships': {
-  //  'expenses': {
-  //    data: new jsonapify.Refs('Expense', 'expenses'),
-  //  }
-  // },
-  //'relationships': {
-  //  'entries': new jsonapify.Property('entries'), //<- this sorts of works - it attaches entities in an array
-  //}
+  }
 });
 
 //registry.add ? - used to work with circular - now i have problems: https://github.com/alex94puchades/jsonapify/pull/3

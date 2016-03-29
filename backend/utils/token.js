@@ -17,19 +17,17 @@ module.exports = {
     return token;
   },
   verify(token, cb) {
-    console.log('verify token', token);
     var self = this;  //TODO cleanup this, self , etc
     jwt.verify(token, API_SECRET,(err, decoded) => {
       if (err) {
         cb(err);
       } else {
-        console.log('signing new decoded token', decoded);
         var token = self.sign(decoded);
         cb(null,token);
       }
     });
   },
-  loggedInRoute() {
+  expressJwtMiddleware() {
     return expressJwt({ secret: API_SECRET});
   }
 }

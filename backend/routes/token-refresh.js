@@ -7,7 +7,6 @@ var apiTokenRefreshRouter = express.Router();
 
 module.exports = function(app) {
   apiTokenRefreshRouter.post('/', function(req, res) {
-    console.log('verifing jsonwebtoken', (req.body.token));
     tokenUtils.verify(req.body.token, function(err, newSignedToken) {
       if (err) {
         console.log('error occured in tokenUtils.verify',err);
@@ -17,7 +16,6 @@ module.exports = function(app) {
             error: err
           });
       } else {
-        console.log('sending new jsonwebtoken', (newSignedToken));
         res.status(200).json({
           token: newSignedToken
         });

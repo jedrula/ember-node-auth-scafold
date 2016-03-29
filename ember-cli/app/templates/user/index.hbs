@@ -2,18 +2,22 @@
 <ul class="list-group">
   <li class="list-group-item">
     Is admin: {{model.admin}}
-    {{#if model.admin}}
-      <button class="btn btn-danger" {{action "toggleAdmin"}}>remove admin</button>
-    {{else}}
-      <button class="btn btn-primary" {{action "toggleAdmin"}}>make admin</button>
+    {{#if (can "toggleAdmin user")}}
+      {{#if model.admin}}
+        <button class="btn btn-danger" {{action "toggleAdmin"}}>remove admin</button>
+      {{else}}
+        <button class="btn btn-primary" {{action "toggleAdmin"}}>make admin</button>
+      {{/if}}
     {{/if}}
   </li>
   <li class="list-group-item">
     Is user manager: {{model.usermanager}}
-    {{#if model.usermanager}}
-      <button class="btn btn-danger" {{action "toggleUsermanager"}}>remove user manager</button>
-    {{else}}
-      <button class="btn btn-primary" {{action "toggleUsermanager"}}>make user manager</button>
+    {{#if (can "toggleUsermanager user")}}
+      {{#if model.usermanager}}
+        <button class="btn btn-danger" {{action "toggleUsermanager"}}>remove user manager</button>
+      {{else}}
+        <button class="btn btn-primary" {{action "toggleUsermanager"}}>make user manager</button>
+      {{/if}}
     {{/if}}
   </li>
 </ul>
@@ -22,3 +26,6 @@
     view {{model.identification}} expenses
   {{/link-to}}
 </div>
+{{#if (can "crud user" id=model.id)}}
+  <button class="btn btn-danger" {{action "removeUser"}}>remove user</button>
+{{/if}}

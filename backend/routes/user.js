@@ -11,69 +11,65 @@ var logger = require('../utils/logger');
 var debugbody = logger.debugbody;
 var logErrors = logger.logErrors;
 
+function canRud() {
+  return function(req,res,next) {
+    if(["*",req.params.id].indexOf(req.user.scopes.crud.user) > -1 ){
+      next();
+    }
+    else{
+      res.send(401);
+    }
+  };
+}
 
+function modifyHackGuard() {
+  return function(req,res,next) {
+    var attrs = req.body.data.attributes;
+    if(!req.user.scopes.toggleAdmin) {
+      delete attrs.admin; //cant patch this so make sure its deleted. would be nice to have some info that someone was actually trying to hack if thats the case
+    }
+    if(!req.user.scopes.toggleUsermanager) {
+      delete attrs.usermanager; //cant patch this so make sure its deleted. would be nice to have some info that someone was actually trying to hack if thats the case
+    }
+    next();
+  };
+}
 
 //TODO make sure that this uses SSL
 module.exports = function (app) {
   myServerRouter.route('/').post([
-    debugbody('posting'),
+    tokenUtils.expressJwtMiddleware(),
+    modifyHackGuard(),
     jsonapify.create('User'),
-    function(err, req, res, next) {
-                console.log('errror in jsonapify', err);
-                next(err);
-        },
     jsonapify.errorHandler('User')
   ]).get([
+    tokenUtils.expressJwtMiddleware(),
+    canRud(),  //this will work because req.params.id is undefined
     jsonapify.enumerate('User'),
     jsonapify.errorHandler('User')
   ]);
 
 
-
-  //TODO manage rights to this resource
   myServerRouter.route('/:id').get([
-    (req,res,next) => {
-     console.log(jsonapify.param('id'), jsonapify.param('_id'), 'jsonapify params ');
-     next();
-    },
-    //debugbody('get id'),
+    tokenUtils.expressJwtMiddleware(),
+    canRud(),  //this will work because req.params.id is undefined
     jsonapify.read(['User', jsonapify.param('id')]),
     logErrors,
     jsonapify.errorHandler()
   ]);
 
-
-  //TODO allow only for admin and userManager
   myServerRouter.route('/:id').delete([
+    tokenUtils.expressJwtMiddleware(),
+    canRud(),  //this will work because req.params.id is undefined
     jsonapify.remove(['User',jsonapify.param('id')]),
     jsonapify.errorHandler()
   ]).patch([
-    (req,res) => {
-      var attributes = {};
-      var id = req.params.id;
-      try {
-        attributes = req.body.data.attributes;
-        User.update({ _id: id }, { $set: attributes}, (err,updateResult) =>{
-          //updateResult.nModified === 0 <- is also true when there were no changes
-          if(updateResult.n === 0) {
-            res.status(404).end();
-          }
-          else {
-            res.status(204).end();
-          }
-        });
-      }
-      catch(e) {
-        res.status(400).end();
-      }
-      //req.body.data.attributes
-      //TODO check why jsonapify.modify does not work - seems like sth wrong with jsonpatch
-     // debugger;
-
-      //TODO update and send 204 with no content when updated
-    }
+    tokenUtils.expressJwtMiddleware(),
+    canRud(),
+    modifyHackGuard(),
+    jsonapify.update(['User', jsonapify.param('id')]),
+    jsonapify.errorHandler()
   ]);
-
 
   app.use('/api/users', myServerRouter);
 }

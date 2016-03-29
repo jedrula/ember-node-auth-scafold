@@ -22,6 +22,7 @@
     "jsonapify": "^1.6.7",
     "jsonpatch": "^2.0.0",
     "jsonwebtoken": "^5.5.4",
+    "lodash": "^4.6.1",
     "mongoose": "^4.3.4"
   },
   "engines": {

@@ -25,6 +25,7 @@ Router.map(function() {
   this.route('users');
 
   this.route('expense', function() {});
+  this.route('createuser');
 });
 
 export default Router;

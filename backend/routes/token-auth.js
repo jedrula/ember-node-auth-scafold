@@ -65,7 +65,9 @@ module.exports = function (app) {
             crud: {
               expense: crudExpensesOwnedBy,
               user: crudUsers
-            }
+            },
+            toggleAdmin: user.admin,
+            toggleUsermanager: user.admin || user.usermanager
           }
 
         };
@@ -73,7 +75,6 @@ module.exports = function (app) {
         var json = {
           token: token
         };
-        console.log('sending json back', json);
         res.status(200).json(json);
       }
     });

@@ -10,6 +10,19 @@ export default Ember.Controller.extend({
     toggleUsermanager() {
       return this._toggleRole('usermanager');
     },
+    removeUser() {
+      let user = this.get('model');
+      const id = user.get('id');
+      return user.destroyRecord().then(() => {
+        if(user.get('id') === this.get('sessionAccount.token.id')) {
+          alert('Your have deleted your account. If you want to come back login with different account or register');
+          this.get('sessionAccount.session').invalidate();
+        }
+        else {
+          this.transitionToRoute('users');
+        }
+      });
+    }
   },
   _toggleRole(role) {
     let user = this.get('model');
@@ -21,5 +34,6 @@ export default Ember.Controller.extend({
         this.get('sessionAccount.session').invalidate();
       }
     });
-  }
+  },
+
 });
