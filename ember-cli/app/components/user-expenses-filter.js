@@ -4,12 +4,19 @@ export default Ember.Component.extend({
   extraPickadateOptions: {},
 
   actions: {
-    /**
-     * @param  element [minDate or maxDate]
-     */
-    datePicked(element, newDate) {
+    minDatePicked(newDate) {
       if(newDate) {  //only assign a value if its actually meaningful.
-        this.set(element, newDate);
+        newDate.setHours(0,0,0,0);
+        this.set('minDate', newDate);
+      }
+      else {
+        this.set(element, undefined);  //make sure date is set to undefined when it does not exist. We do not want null. This way it wont get posted in the form submit
+      }
+    },
+    maxDatePicked(newDate) {
+      if(newDate) {  //only assign a value if its actually meaningful.
+        newDate.setHours(23,59,59,999);
+        this.set('maxDate', newDate);
       }
       else {
         this.set(element, undefined);  //make sure date is set to undefined when it does not exist. We do not want null. This way it wont get posted in the form submit
