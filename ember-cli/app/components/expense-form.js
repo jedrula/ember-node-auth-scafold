@@ -1,8 +1,15 @@
 import Ember from 'ember';
 export default Ember.Component.extend({
-  date: new Date(),
   didReceiveAttrs() {
-    this.set('time',this.get('time') || this.get('date'));
+    if(!this.get('date')) {
+      let nowDate =  new Date();
+      nowDate.setHours(12,0,0,0);
+      this.set('date',nowDate);
+
+      let nowTime =  new Date();
+      nowTime.setHours(12,0,0,0);
+      this.set('time',nowTime);
+    }
   },
   dateAndTime: Ember.computed('date','time',function(){
     const date = this.get('date');
@@ -15,6 +22,7 @@ export default Ember.Component.extend({
     save() {
       let data = this.getProperties(['amount','description','comment']);
       data.date =  this.get('dateAndTime');
+
       this.get('persist')(data);
     }
   }

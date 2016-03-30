@@ -3,7 +3,7 @@ const { service } = Ember.inject;
 
 export default Ember.Route.extend({
   sessionAccount: service(),
-  beforeModel(transition) {
+  beforeModel(/*transition*/) {
     const id = this.get('sessionAccount.token.id');
     if(id) {
       this.transitionTo('user.expenses',id);

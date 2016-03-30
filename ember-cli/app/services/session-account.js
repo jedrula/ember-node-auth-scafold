@@ -1,7 +1,7 @@
 //taken from https://github.com/simplabs/ember-simple-auth/blob/master/tests/dummy/app/services/session-account.js
 import Ember from 'ember';
 
-const { inject: { service }, RSVP } = Ember;
+const { inject: { service } } = Ember;
 
 export default Ember.Service.extend({
   session: service('session'),

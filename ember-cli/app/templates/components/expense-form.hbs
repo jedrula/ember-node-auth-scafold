@@ -1,8 +1,15 @@
-<form class="form-inline" {{action 'save' on='submit'}}>
+<form class="add-expense form-inline" {{action 'save' on='submit'}}>
 
   <div class="form-group">
-      {{pick-a-date required="true" useUTC=true date=(readonly date) on-selected=(action (mut date)) placeholder="Pick a date" options=(readonly extraPickadateOptions)}}
+      <!-- {{pick-a-date required="true" editable="true" useUTC=true date=(readonly date) on-selected=(action (mut date)) placeholder="Pick a date" options=(readonly extraPickadateOptions)}} -->
+      {{#pick-a-date
+        on-selected=(action (mut date))
+        date=(readonly date)
+      }}
+        <input required=true class="form-control" id="date" placeholder='date' value={{moment-format date 'DD MMMM, YYYY'}}>
+      {{/pick-a-date}}
   </div>
+
 
   <div class="form-group">
       {{pick-a-time useUTC=true date=(readonly time) on-selected=(action (mut time)) placeholder="Pick a time"}}

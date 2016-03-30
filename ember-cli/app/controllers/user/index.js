@@ -12,7 +12,6 @@ export default Ember.Controller.extend({
     },
     removeUser() {
       let user = this.get('model');
-      const id = user.get('id');
       return user.destroyRecord().then(() => {
         if(user.get('id') === this.get('sessionAccount.token.id')) {
           alert('Your have deleted your account. If you want to come back login with different account or register');

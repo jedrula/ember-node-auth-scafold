@@ -8,7 +8,7 @@ export default Ember.Controller.extend({
       let expense = this.store.createRecord('expense', obj);
       return expense.save().then(() => {
         this.transitionToRoute('user.expenses', userModel);
-      })
+      });
     }
   }
 });
