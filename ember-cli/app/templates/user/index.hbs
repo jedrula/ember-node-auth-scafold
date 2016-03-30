@@ -22,9 +22,9 @@
   </li>
 </ul>
 <div>
-  {{#link-to 'user.expenses' model}}
-    view {{model.identification}} expenses
-  {{/link-to}}
+  {{#if (can "crud expense" ownerid=model.id)}}
+    {{#link-to 'user.expenses' model}}view {{model.identification}} expenses {{/link-to}}
+  {{/if}}
 </div>
 {{#if (can "crud user" id=model.id)}}
   <button class="btn btn-danger" {{action "removeUser"}}>remove user</button>

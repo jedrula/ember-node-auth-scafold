@@ -53,7 +53,7 @@ module.exports = function(environment) {
     serverTokenEndpoint: ENV.APP.API_SERVER_URL + '/api/token-auth/',
     serverTokenRefreshEndpoint: ENV.APP.API_SERVER_URL + '/api/token-refresh/',
     timeFactor: 1000,
-    refreshLeeway: 60//2 * 60, //2 minutes before expiration
+    refreshLeeway: 24 * 60 * 60, //24 hrs before expiration
   }
 
   return ENV;

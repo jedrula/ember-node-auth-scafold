@@ -2,27 +2,22 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   didReceiveAttrs() {
     if(!this.get('date')) {
-      let nowDate =  new Date();
-      nowDate.setHours(12,0,0,0);
-      this.set('date',nowDate);
-
-      let nowTime =  new Date();
-      nowTime.setHours(12,0,0,0);
-      this.set('time',nowTime);
+      const initDate = new Date();
+      initDate.setMinutes(0);
+      this.set('date',initDate);
     }
   },
-  dateAndTime: Ember.computed('date','time',function(){
-    const date = this.get('date');
-    const time = this.get('time');
-    let ret = new Date(date);
-    ret.setHours(time.getHours(),time.getMinutes(),time.getSeconds());
-    return ret;
-  }),
   actions: {
+    timeChanged(newTime) {
+      this.get('date').setHours(newTime.getHours(),newTime.getMinutes(),0,0);
+    },
+    dateChanged(newDate) {
+      this.get('date').setFullYear(newDate.getFullYear());
+      this.get('date').setMonth(newDate.getMonth());
+      this.get('date').setDate(newDate.getDate());
+    },
     save() {
-      let data = this.getProperties(['amount','description','comment']);
-      data.date =  this.get('dateAndTime');
-
+      let data = this.getProperties(['amount','date','description','comment']);
       this.get('persist')(data);
     }
   }

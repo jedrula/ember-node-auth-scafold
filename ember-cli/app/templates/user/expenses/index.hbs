@@ -12,8 +12,12 @@
   remove=(action "remove")
   editable=true
 }}
-{{#if (can "crud expense" ownerid=model.user.id)}}
-  {{#link-to 'user.expense.new' model.user}}Add new expense{{/link-to}}
-{{/if}}
 
-{{#link-to 'user.expenses.print' model.user}}Print{{/link-to}}
+{{#if (can "crud expense" ownerid=model.user.id)}}
+  <div>
+    {{#link-to 'user.expense.new' model.user}}Add new expense{{/link-to}}
+  </div>
+  <div>
+    {{#link-to 'user.expenses.print' model.user}}Print these expenses{{/link-to}}
+  </div>
+{{/if}}

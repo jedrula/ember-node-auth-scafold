@@ -5,7 +5,7 @@ if(!API_SECRET) {
   console.warn('missing a secret for jwt');
 }
 
-var expiresIn = 120;//10 * 60;//10 mintues
+var expiresIn = 2 * 24 * 60 * 60;//2 days
 
 module.exports = {
   sign(obj) {
