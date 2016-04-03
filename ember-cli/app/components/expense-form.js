@@ -1,23 +1,18 @@
 import Ember from 'ember';
 export default Ember.Component.extend({
-  didReceiveAttrs() {
-    if(!this.get('date')) {
-      const initDate = new Date();
-      initDate.setMinutes(0);
-      this.set('date',initDate);
+  didInitAttrs() {
+    //TODO remove just for debugging
+    if(!this.get('amount')){
+      this.set('amount',2);
+      this.set('description','desc');
+      this.set('currency','$');
+      this.set('href','http://www.onet.pl');
+      this.set('title','weoiq osadj');
     }
   },
   actions: {
-    timeChanged(newTime) {
-      this.get('date').setHours(newTime.getHours(),newTime.getMinutes(),0,0);
-    },
-    dateChanged(newDate) {
-      this.get('date').setFullYear(newDate.getFullYear());
-      this.get('date').setMonth(newDate.getMonth());
-      this.get('date').setDate(newDate.getDate());
-    },
     save() {
-      let data = this.getProperties(['amount','date','description','comment']);
+      let data = this.getProperties(['amount','description','currency','href','title']);
       this.get('persist')(data);
     }
   }

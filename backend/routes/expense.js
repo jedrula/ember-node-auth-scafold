@@ -56,9 +56,24 @@ function canRud() {
   }
 }
 
+/**
+ * removes fields which cannot be modified if user does not have rights like unverified
+ */
+function modifyHackGuard() {
+  return function(req,res,next) {
+    var attrs = req.body.data.attributes;
+    if(!_.get(req,'user.scopes.toggleAdmin')) {
+      //TODO this sort of works but the socpe is gibrish map of toggleAdmin to unverified
+      delete attrs.unverified; //cant patch this so make sure its deleted. would be nice to have some info that someone was actually trying to hack if thats the case
+    }
+    next();
+  };
+}
+
 module.exports = function (app) {
   myServerRouter.route('/').post([
     tokenUtils.expressJwtMiddleware(),
+    modifyHackGuard(),
     canCreate(),
     jsonapify.create('Expense'),
     jsonapify.errorHandler('Expense')
@@ -103,7 +118,6 @@ module.exports = function (app) {
     jsonapify.errorHandler('Expense')
   ]);
 
-
   myServerRouter.route('/:id').get([
     tokenUtils.expressJwtMiddleware(),
     canRud(),
@@ -117,6 +131,7 @@ module.exports = function (app) {
   ]).patch([
     tokenUtils.expressJwtMiddleware(),
     canRud(),
+    modifyHackGuard(),
     jsonapify.update(['Expense',jsonapify.param('id')]),
     jsonapify.errorHandler()
   ]);

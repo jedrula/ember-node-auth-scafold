@@ -11,10 +11,14 @@ const resource = new jsonapify.Resource(Expense, {
   },
   attributes: {
     amount: new jsonapify.Property('amount'),
-    date: new jsonapify.Property('date'),
     description: new jsonapify.Property('description'),
-    comment: new jsonapify.Property('comment'),
-    //TODO time
+    href: new jsonapify.Property('href'),
+    title: new jsonapify.Property('title'),
+    currency: new jsonapify.Property('currency'),
+    unverified: {
+      value: new jsonapify.Property('unverified'),
+      nullable: true
+    }
   },
   relationships: {
 		user: {

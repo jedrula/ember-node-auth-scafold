@@ -1,8 +1,9 @@
+<div class="title"><label>Title:</label> {{expense.title}}</div>
+<div class="href"><label>Href:</label> {{expense.href}}</div>
 <div class="amount"><label>Amount:</label> {{expense.amount}}</div>
+<div class="currency"><label>currency:</label> {{expense.currency}}</div>
+<div class="unverified"><label>Unverified:</label> {{expense.unverified}}</div>
 <div class="description"><label>Description:</label> {{expense.description}} </div>
-<div class="comment"><label>Comment:</label>  {{expense.comment}} </div>
-<div class="date"><label>Date:</label> {{moment-format expense.date 'DD MMMM, YYYY'}}</div>
-<div class="time"><label>Time:</label> {{moment-format expense.date 'hh:mm A'}}</div>
 {{#if editable}}
   {{#if (can "crud expense" ownerid=user.id)}}
     {{#link-to "user.expense.edit" user expense class="btn btn-primary"}}Edit{{/link-to}}

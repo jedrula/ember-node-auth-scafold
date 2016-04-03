@@ -1,32 +1,22 @@
-<form class="add-expense form-inline" {{action 'save' on='submit'}}>
+<form class="add-expense form-horizontal" {{action 'save' on='submit'}}>
+
 
   <div class="form-group">
-      <!-- {{pick-a-date required="true" editable="true" useUTC=true date=(readonly date) on-selected=(action (mut date)) placeholder="Pick a date" options=(readonly extraPickadateOptions)}} -->
-      {{#pick-a-date
-        on-selected=(action "dateChanged")
-        date=(readonly date)
-      }}
-        <input required=true class="form-control" id="date" placeholder='date' value={{moment-format date 'DD MMMM, YYYY'}}>
-      {{/pick-a-date}}
-  </div>
 
-  <div class="form-group">
-      {{pick-a-time
-        useUTC=true
-        date=(readonly date)
-        on-selected=(action "timeChanged")
-        placeholder="Pick a time"}}
-  </div>
+    <div class="input-group">
+        <input required=true type="text" class="form-control" id="title" placeholder='title' value={{title}} oninput={{action (mut title) value="target.value"}}>
+    </div>
 
-  <div class="form-group">
+    <div class="input-group">
+        <input required=true type="url" class="form-control" id="href" placeholder='href' value={{href}} oninput={{action (mut href) value="target.value"}}>
+    </div>
+
     <div class="input-group">
         <input required=true min=0 type="number" class="form-control" id="amount" placeholder='amount' value={{amount}} oninput={{action (mut amount) value="target.value"}}>
+        <input required=true type="text" class="form-control" id="currency" placeholder='currency' value={{currency}} oninput={{action (mut currency) value="target.value"}}>
     </div>
     <div class="input-group">
         <input required=true type="text" class="form-control" id="description" placeholder='description' value={{description}} oninput={{action (mut description) value="target.value"}}>
-    </div>
-    <div class="input-group">
-        <input required=true type="text" class="form-control" id="comment" placeholder='comment' value={{comment}} oninput={{action (mut comment) value="target.value"}}/>
     </div>
   </div>
   <div class="form-group">

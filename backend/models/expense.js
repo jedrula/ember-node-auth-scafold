@@ -1,15 +1,31 @@
 const mongoose = require('mongoose');
 
 var schema = mongoose.Schema({
-  date: {type: Date, required: true},
-  //TODO time
-  amount: {type: Number, required: true},
+  amount: {
+    type: Number,
+    required: true
+  },
   description: {
-  	type: String, 
+  	type: String,
   	required: true,
   	index : "text"
   },
-  comment: {type: String, required: true},
+  title: {
+  	type: String,
+  	required: true
+  },
+  href: {
+  	type: String,
+  	required: true
+  },
+  currency: {
+  	type: String,
+  	required: true
+  },
+  unverified: {
+    type: Boolean,
+    default: true
+  },
   user: {
     type: mongoose.Schema.ObjectId,
     ref: 'User',  //TODO maybe this is not really needed... maybe it would rather be simply user_id ?
